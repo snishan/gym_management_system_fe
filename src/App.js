@@ -1,14 +1,31 @@
 import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-scroll';
 
 function App() {
+
+  useEffect(() => {
+    const handleLoad = () => {
+      const preloader = document.getElementById('js-preloader');
+      if (preloader) {
+        preloader.classList.add('loaded');
+      }
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
   return (
     <div className="App">
       {/* <header className="App-header">
         
       </header> */}
-      <body>
       {/* Preloader Start */}
-      {/* <div id="js-preloader" className="js-preloader">
+      <div id="js-preloader" className="js-preloader">
         <div className="preloader-inner">
           <span className="dot"></span>
           <div className="dots">
@@ -17,7 +34,7 @@ function App() {
             <span></span>
           </div>
         </div>
-      </div> */}
+      </div>
       {/* Preloader End */}
     
       {/* Header Area Start */}
@@ -31,11 +48,78 @@ function App() {
                 {/* Logo End */}
                 {/* Menu Start */}
                 <ul className="nav">
-                  <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
+                  {/* <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
                   <li className="scroll-to-section"><a href="#features">About</a></li>
                   <li className="scroll-to-section"><a href="#our-classes">Classes</a></li>
                   <li className="scroll-to-section"><a href="#schedule">Schedules</a></li>
-                  <li className="scroll-to-section"><a href="#contact-us">Contact</a></li>
+                  <li className="scroll-to-section"><a href="#contact-us">Contact</a></li> */}
+                  <li className="scroll-to-section">
+                  <Link
+                    activeClass="active scroll-to-section"
+                    to="top"
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                    className='scroll-to-section'
+                  >
+                   Home
+                  </Link>
+                  </li>
+                  <li className="scroll-to-section">
+                    <Link
+                      activeClass="active scroll-to-section"
+                      to="features"
+                      spy={true}
+                      smooth={true}
+                      offset={70}
+                      duration={500}
+                      className='scroll-to-section'
+                    >
+                    About
+                    </Link>
+                  </li>
+                  <li className="scroll-to-section">
+                    <Link
+                      activeClass="active scroll-to-section"
+                      to="our-classes"
+                      spy={true}
+                      smooth={true}
+                      offset={70}
+                      duration={600}
+                      className='scroll-to-section'
+                    >
+                    Classes
+                    </Link>
+                  </li>
+                  <li className="scroll-to-section">
+                    <Link
+                      activeClass="active scroll-to-section"
+                      to="schedule"
+                      spy={true}
+                      smooth={true}
+                      offset={70}
+                      duration={700}
+                      className='scroll-to-section'
+                    >
+                    Schedules
+                    </Link>
+                  </li>
+                  <li className="scroll-to-section">
+                    <Link
+                      activeClass="active scroll-to-section"
+                      to="contact-us"
+                      spy={true}
+                      smooth={true}
+                      offset={70}
+                      duration={800}
+                      className='scroll-to-section'
+                    >
+                    Contact
+                    </Link>
+                  </li>
+                  
+                  
                   <li className="main-button"><a href="#">Sign Up</a></li>
                 </ul>
                 <a className='menu-trigger'>
@@ -157,7 +241,7 @@ function App() {
           <div className="row">
             <div className="col-lg-10 offset-lg-1">
               <div className="cta-content">
-                <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
+                <h2>Don't <em>think</em>, begin <em>today</em>!</h2>
                 <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula, sit amet dapibus odio augue eget libero. Morbi tempus mauris a nisi luctus imperdiet.</p>
                 <div className="main-button scroll-to-section">
                   <a href="#our-classes">Become a member</a>
@@ -449,7 +533,6 @@ function App() {
         </div>
       </footer>
       {/* Footer End */}
-    </body>
     </div>
   );
 }
