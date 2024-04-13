@@ -1,0 +1,37 @@
+
+#features {
+    margin-bottom: 80px;
+  }
+  
+  .feature-item {
+    display: inline-block;
+    margin-bottom: 60px;
+  }
+  
+  .feature-item .left-icon img {
+    float: left;
+    margin-right: 30px;
+  }
+  
+  .feature-item .right-content {
+    display: inline;
+  }
+  
+  .feature-item .right-content h4 {
+    margin-top: 0px;
+    margin-bottom:  7px;
+    letter-spacing: 0.25px;
+    color: #232d39;
+    font-size: 19px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .feature-item .right-content a.text-button {
+    margin-top: 7px;
+    display: inline-block;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #ed563b;
+    font-weight: 500;
+  }
