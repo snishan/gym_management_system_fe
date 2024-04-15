@@ -1,0 +1,37 @@
+.input-style {
+  padding: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  width: 100%;
+  border: 1px solid #cbd5e0;
+
+  &::placeholder {
+    opacity: 0.6;
+  }
+}
+
+.container-style {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.label-style {
+  font-weight: 600;
+  text-transform: capitalize;
+  height: 32px;
+}
+
+.error-container-style {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  color: #ef4444;
+  background-color: #fee2e2;
+  border-radius: 0.375rem;
+  margin: 0;
+}
