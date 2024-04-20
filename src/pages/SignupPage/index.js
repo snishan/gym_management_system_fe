@@ -1,10 +1,11 @@
 import React from "react";
-import { Form } from "../../components/Form";
+import { SignUpForm } from "../../components/SignUpForm";
+import '../../assets/scss/signUp.scss'
 
 const SignupPage = () => {
   return (
-    <div>
-      <Form />
+    <div className="signup-page">
+      <SignUpForm />
     </div>
   );
 };
