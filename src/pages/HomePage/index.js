@@ -1,14 +1,18 @@
 import React from "react";
 import Header from "../../components/header";
 import MainBanner from "../../components/mainBanner";
-import Ourclasses from "../../components/ourClasses";
+import SecondBanner from "../../components/secondBanner";
+import Features from "../../components/features";
+import OurClasses from "../../components/ourClasses";
 
 const HomePage = () => {
   return (
     <div>
   <Header/>
   <MainBanner/>
-  <Ourclasses/>
+  <Features/>
+  <SecondBanner/>
+  <OurClasses/>
     </div>
 
   );
