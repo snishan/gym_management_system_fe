@@ -3,6 +3,7 @@ import { findInputError, isFormInvalid } from "../utils";
 import { useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import "../assets/scss/input.scss";
+import Form from 'react-bootstrap/Form';
 
 export const Input = ({
   name,
@@ -12,6 +13,8 @@ export const Input = ({
   placeholder,
   validation,
   multiline,
+  select, 
+  options,
 }) => {
   const {
     register,
@@ -28,7 +31,7 @@ export const Input = ({
         style={{ justifyContent: "space-between", flexDirection: "row" }}
       >
         <label htmlFor={id} className="label-style">
-          {label}
+          <span>{label}</span>
         </label>
         {isInvalid && (
           <InputError
@@ -37,7 +40,20 @@ export const Input = ({
           />
         )}
       </div>
-      {multiline ? (
+      {select ? ( // Conditional rendering for select input
+        <Form.Select
+          id={id}
+          className="input-style"
+          placeholder={placeholder}
+          {...register(name, validation)}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Form.Select>
+      ) : multiline ? (
         <textarea
           id={id}
           type={type}
@@ -47,7 +63,7 @@ export const Input = ({
           {...register(name, validation)}
         ></textarea>
       ) : (
-        <input
+        <Form.Control
           id={id}
           type={type}
           className="input-style"

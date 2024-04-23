@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Input } from "./Input";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -10,13 +10,23 @@ import {
   retype_password_validation,
 } from "../utils/inputValidations";
 import { useState } from "react";
-import { GrMail } from "react-icons/gr";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 import "../assets/scss/form.scss";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { IoPersonAddOutline } from "react-icons/io5";
+import { RiLoginBoxLine } from "react-icons/ri";
 
-export const Form = () => {
+
+export const SignUpForm = () => {
   const methods = useForm();
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (success) {
+      toast.success("Sign Up Successful!");
+    }
+  }, [success]);
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data);
@@ -24,14 +34,21 @@ export const Form = () => {
     setSuccess(true);
   });
 
+  const navigate = useNavigate();
+
+  const navigateToSignIn = () => {
+    navigate("/signin");
+  };
+
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={(e) => e.preventDefault()}
         noValidate
         autoComplete="off"
-        className="container"
+        className="form-container"
       >
+        <h3 className="mb-4 text-center">Sign Up</h3>
         <div className="grid-container">
           <Input {...first_name_validation} />
           <Input {...last_name_validation} />
@@ -40,13 +57,18 @@ export const Form = () => {
           <Input {...password_validation} />
           <Input {...retype_password_validation} />
         </div>
-        <div className="mt-4 d-flex justify-content-center flex-column ">
+        <div className="mt-4  grid-container">
+          <button onClick={navigateToSignIn} className="navigation-button">
+          <RiLoginBoxLine />
+            Sign In
+          </button>
           <button onClick={onSubmit} className="submit-button">
-            <GrMail /> Submit Form
+          <IoPersonAddOutline />
+            Sign Up
           </button>
           {success && (
             <p className="success-message">
-              <BsFillCheckSquareFill /> Form has been submitted successfully
+              <BsFillCheckSquareFill /> &nbsp; Sign Up Successful!
             </p>
           )}
         </div>

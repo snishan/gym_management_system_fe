@@ -17,7 +17,7 @@ const Header = () => {
                             <li className="scroll-to-section"><a href="#our-classes">Our Classes</a></li>
                             <li className="scroll-to-section"><a href="#trainers">Trainers</a></li>
                             {/* <li className="scroll-to-section"><a href="#contact-us">Contact</a></li>  */}
-                            <li className="main-button"><a href="#">Sign Up</a></li>
+                            <li className="main-button"><a href="/signup">Sign Up</a></li>
                         </ul>        
                         <a className='menu-trigger'>
                             <span>Menu</span>
