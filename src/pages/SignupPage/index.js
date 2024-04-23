@@ -1,12 +1,12 @@
-import React from "react";
-import { Form } from "../../components/Form";
+// import React from "react";
+// import { Form } from "../../components/Form";
 
-const SignupPage = () => {
-  return (
-    <div>
-      <Form />
-    </div>
-  );
-};
+// const SignupPage = () => {
+//   return (
+//     <div>
+//       <Form />
+//     </div>
+//   );
+// };
 
-export default SignupPage;
+// export default SignupPage;
