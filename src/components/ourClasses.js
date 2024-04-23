@@ -1,7 +1,66 @@
-import React from "react";
+import React,{useState} from "react";
 import "../assets/scss/ourClasses.scss"
+import tabIcon from "../assets/img/ourCalass/tabs-first-icon.png"
+import taining01 from "../assets/img/ourCalass/training-image-01.jpg"
+import taining02 from "../assets/img/ourCalass/training-image-02.jpg"
+import taining03 from "../assets/img/ourCalass/training-image-03.jpg"
+import taining04 from "../assets/img/ourCalass/training-image-04.jpg"
+
 
 const OurClasses = () => {
+  const [tab, setTab] = useState(1)
+
+  const handleTab=(val)=>{
+    setTab(val)
+  }
+
+  const returnContainer=()=>{
+    if (tab==1) {
+      return(
+        <article id='tabs-1'>
+        <img src={taining01} alt="First Class"/>
+        <h4>Functional Fitness</h4>
+        <p>Enhance your everyday movements and improve functional strength with our Functional Fitness classes. These dynamic workouts incorporate a variety of exercises inspired by real-life activities, helping you develop strength, mobility, and stability to perform daily tasks with ease and confidence.</p>
+        <div className="main-button">
+            <a href="#">View Schedule</a>
+        </div>
+      </article>
+      )
+    }else if(tab==2){
+      return(
+        <article id='tabs-2'>
+        <img src={taining02} alt="Second Training"/>
+        <h4>Cardio Blast</h4>
+        <p>Ignite your cardiovascular system with high-energy workouts designed to boost endurance and burn calories. From heart-pumping cardio sessions to dynamic interval training, our Cardio Blast classes offer a fun and effective way to improve your cardiovascular health and stamina.</p>
+        <div className="main-button">
+            <a href="#">View Schedule</a>
+        </div>
+      </article>
+      )
+    }else if(tab==3){
+      return(
+        <article id='tabs-3'>
+        <img src={taining03} alt="Third Class"/>
+        <h4>Strength & Tone</h4>
+        <p>Sculpt your body and build lean muscle with our Strength & Tone classes. Whether you're a beginner or a seasoned lifter, our expert instructors will guide you through challenging exercises targeting all major muscle groups, helping you achieve your strength and toning goals.</p>
+        <div className="main-button">
+            <a href="#">View Schedule</a>
+        </div>
+      </article>
+      )
+    }else if(tab==4){
+      return(
+        <article id='tabs-4'>
+        <img src={taining04} alt="Fourth Training"/>
+        <h4>Mindful Movement (Yoga & Pilates)</h4>
+        <p>Rejuvenate your body and calm your mind with our Mindful Movement classes, including yoga and Pilates. These classes focus on improving flexibility, core strength, and overall body awareness through mindful breathing and controlled movements, leaving you feeling refreshed and balanced.</p>
+        <div className="main-button">
+            <a href="#">View Schedule</a>
+        </div>
+      </article>
+      )
+    }
+  }
     return (
      <section className="section" id="our-classes">
         <div className="container">
@@ -10,54 +69,26 @@ const OurClasses = () => {
                     <div className="section-heading">
                         <h2>Our <em>Classes</em></h2>
                         <img src="assets/images/line-dec.png" alt=""/>
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                        <p>Explore our diverse range of classes tailored to your fitness goals. From yoga to strength training, find the perfect fit for your journey towards wellness.</p>
                     </div>
                 </div>
             </div>
             <div className="row" id="tabs">
               <div className="col-lg-4">
                 <ul>
-                  <li><a href='#tabs-1'><img src="assets/images/tabs-first-icon.png" alt=""/>First Training Class</a></li>
-                  <li><a href='#tabs-2'><img src="assets/images/tabs-first-icon.png" alt=""/>Second Training Class</a></li>
-                  <li><a href='#tabs-3'><img src="assets/images/tabs-first-icon.png" alt=""/>Third Training Class</a></li>
-                  <li><a href='#tabs-4'><img src="assets/images/tabs-first-icon.png" alt=""/>Fourth Training Class</a></li>
+                  <li><a  className={tab==1?'active-tab':''} onClick={()=>handleTab(1)}><img src={tabIcon}  alt=""/>Functional Fitness</a></li>
+                  <li><a  className={tab==2?'active-tab':''} onClick={()=>handleTab(2)}><img src={tabIcon}  alt=""/>Cardio Blast</a></li>
+                  <li><a  className={tab==3?'active-tab':''} onClick={()=>handleTab(3)}><img src={tabIcon} alt=""/>Strength & Tone</a></li>
+                  <li><a  className={tab==4?'active-tab':''} onClick={()=>handleTab(4)}><img src={tabIcon}  alt=""/>Mindful Movement</a></li>
                   <div className="main-rounded-button"><a href="#">View All Schedules</a></div>
                 </ul>
               </div>
               <div className="col-lg-8">
                 <section className='tabs-content'>
-                  <article id='tabs-1'>
-                    <img src="assets/images/training-image-01.jpg" alt="First Class"/>
-                    <h4>First Training Class</h4>
-                    <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut, accumsan diam.</p>
-                    <div className="main-button">
-                        <a href="#">View Schedule</a>
-                    </div>
-                  </article>
-                  <article id='tabs-2'>
-                    <img src="assets/images/training-image-02.jpg" alt="Second Training"/>
-                    <h4>Second Training Class</h4>
-                    <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. Nam tellus nibh, ullamcorper at mattis non, rhoncus sed massa. Cras quis pulvinar eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                    <div className="main-button">
-                        <a href="#">View Schedule</a>
-                    </div>
-                  </article>
-                  <article id='tabs-3'>
-                    <img src="assets/images/training-image-03.jpg" alt="Third Class"/>
-                    <h4>Third Training Class</h4>
-                    <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id scelerisque felis magna id felis. Proin neque metus, pellentesque pharetra semper vel, accumsan a neque.</p>
-                    <div className="main-button">
-                        <a href="#">View Schedule</a>
-                    </div>
-                  </article>
-                  <article id='tabs-4'>
-                    <img src="assets/images/training-image-04.jpg" alt="Fourth Training"/>
-                    <h4>Fourth Training Class</h4>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ultrices elementum odio ac tempus. Etiam eleifend orci lectus, eget venenatis ipsum commodo et.</p>
-                    <div className="main-button">
-                        <a href="#">View Schedule</a>
-                    </div>
-                  </article>
+                
+                {returnContainer()}
+                 
+                 
                 </section>
               </div>
             </div>

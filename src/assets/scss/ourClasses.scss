@@ -1,0 +1,94 @@
+
+#our-classes {
+    margin-bottom: 140px;
+  }
+  
+  #tabs ul {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  #tabs ul li {
+    margin-bottom: 30px;
+    display: inline-block;
+    width: 100%;
+  }
+  #tabs ul li:last-child {
+    margin-bottom: 0px;
+  }
+  #tabs ul li a {
+    text-transform: capitalize;
+    width: 100%;
+    padding: 30px 30px;
+    display: inline-block;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    font-size: 19px;
+    color: #232d39;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  #tabs .main-rounded-button a {
+    text-align: center;
+    padding: 20px 30px;
+    width: 100%;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    color: #fff;
+    font-size: 19px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    background-color: #ed563b;
+  }
+  #tabs .main-rounded-button a:hover {
+    background-color: #f9735b;
+  }
+  #tabs ul li a img {
+    max-width: 100%;
+    margin-right: 20px;
+  }
+  #tabs ul .ui-tabs-active span {
+    background: #faf5b2;
+    border: #faf5b2;
+    line-height: 90px;
+    border-bottom: none;
+  }
+  #tabs ul .ui-tabs-active a {
+    color: #ed563b;
+  }
+  #tabs ul .ui-tabs-active span {
+    color: #1e1e1e;
+  }
+  .tabs-content {
+    margin-left: 30px;
+    text-align: left;
+    display: inline-block;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .tabs-content img {
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  .tabs-content h4 {
+    font-size: 23px;
+    font-weight: 700;
+    color: #232d39;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+  .tabs-content p {
+    font-size: 14px;
+    color: #7a7a7a;
+    margin-bottom: 28px;
+   
+  }
+  .active-tab{
+    background-color: bisque !important;
+  }
+  

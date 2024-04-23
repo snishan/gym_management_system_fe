@@ -12,7 +12,7 @@ const Features = () => {
                     <div className="section-heading">
                         <h2>Choose <em>Program</em></h2>
                         <img src={lineDec} alt="waves"/>
-                        <p>Training Studio is free CSS template for gyms and fitness centers. You are allowed to use this layout for your business website.</p>
+                        <p>Discover your fitness journey with our diverse program offerings tailored to your goals and preferences. Choose from a variety of programs designed to help you achieve your fitness aspirations</p>
                     </div>
                 </div>
                 <div className="col-lg-6">
@@ -23,7 +23,7 @@ const Features = () => {
                             </div>
                             <div className="right-content">
                                 <h4>Basic Fitness</h4>
-                                <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
+                                <p>Elevate your fitness foundation with our Basic Fitness program, perfect for beginners seeking to establish a solid groundwork for their health and wellness journey.</p>
                                 <a href="#" className="text-button">Discover More</a>
                             </div>
                         </li>
@@ -33,7 +33,7 @@ const Features = () => {
                             </div>
                             <div className="right-content">
                                 <h4>New Gym Training</h4>
-                                <p>If you wish to support TemplateMo website via PayPal, please feel free to contact us. We appreciate it a lot.</p>
+                                <p>Kickstart your fitness journey with our New Gym Training, designed to acquaint beginners with gym equipment and basic exercises for a confident start</p>
                                 <a href="#" className="text-button">Discover More</a>
                             </div>
                         </li>
@@ -43,7 +43,7 @@ const Features = () => {
                             </div>
                             <div className="right-content">
                                 <h4>Basic Muscle Course</h4>
-                                <p>Credit goes to <a rel="nofollow" href="https://www.pexels.com" target="_blank">Pexels website</a> for images and video background used in this HTML template.</p>
+                                <p>Build strength and lay the foundation for your fitness journey with our Basic Muscle Course, tailored for beginners to develop muscle tone and confidence in the gym.</p>
                                 <a href="#" className="text-button">Discover More</a>
                             </div>
                         </li>
@@ -57,7 +57,7 @@ const Features = () => {
                             </div>
                             <div className="right-content">
                                 <h4>Advanced Muscle Course</h4>
-                                <p>You may want to browse through <a rel="nofollow" href="https://templatemo.com/tag/digital-marketing" target="_parent">Digital Marketing</a> or <a href="https://templatemo.com/tag/corporate">Corporate</a> HTML CSS templates on our website.</p>
+                                <p>Unleash your strength and sculpt your physique with our Advanced Muscle Course, designed to push experienced enthusiasts to their limits and achieve remarkable gains.</p>
                                 <a href="#" className="text-button">Discover More</a>
                             </div>
                         </li>
@@ -67,7 +67,7 @@ const Features = () => {
                             </div>
                             <div className="right-content">
                                 <h4>Yoga Training</h4>
-                                <p>This template is built on Bootstrap v4.3.1 framework. It is easy to adapt the columns and sections.</p>
+                                <p>Find inner peace and enhance flexibility with our Yoga Training, where expert guidance and serene environments converge for a transformative wellness experience.</p>
                                 <a href="#" className="text-button">Discover More</a>
                             </div>
                         </li>
@@ -77,7 +77,7 @@ const Features = () => {
                             </div>
                             <div className="right-content">
                                 <h4>Body Building Course</h4>
-                                <p>Suspendisse fringilla et nisi et mattis. Curabitur sed finibus nisi. Integer nibh sapien, vehicula et auctor.</p>
+                                <p>Transform your physique with our intensive Body Building Course, designed to sculpt muscles and maximize strength gains under the guidance of experienced trainers.</p>
                                 <a href="#" className="text-button">Discover More</a>
                             </div>
                         </li>
