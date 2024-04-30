@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { RiLoginBoxLine } from "react-icons/ri";
-
+import Logo from "../assets/img/header/logo.png"
 
 export const SignUpForm = () => {
   const methods = useForm();
@@ -48,6 +48,7 @@ export const SignUpForm = () => {
         autoComplete="off"
         className="form-container"
       >
+        <img className="logo" src={Logo} ></img>
         <h3 className="mb-4 text-center">Sign Up</h3>
         <div className="grid-container">
           <Input {...first_name_validation} />

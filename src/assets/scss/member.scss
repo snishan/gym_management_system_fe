@@ -1,0 +1,32 @@
+.member-page{
+    min-height: 100vh;
+    // width: 100vw;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background: linear-gradient(to right, rgb(77,86,95), rgb(40,61,83));
+    padding: 30px;
+    width: 100%;
+    .active-tab{
+        background-color: burlywood !important;
+      }
+  
+}
+.left-menu a{
+    width: 300px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.left-menu-section, .right-menu-section{
+    margin-top: 10%;
+    height: 100vh;
+    
+    // background-color: aliceblue;
+    // height: 100vh;
+   
+}
+.main-button{
+    a{
+        color: white !important;
+    }
+}

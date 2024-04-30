@@ -6,6 +6,7 @@ import Features from "../../components/features";
 import OurClasses from "../../components/ourClasses";
 import Trainers from "../../components/trainers";
 import Footer from "../../components/footer";
+import Products from "../../components/products";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
   <Features/>
   <SecondBanner/>
   <OurClasses/>
+  <Products/>
   <Trainers/>
   <Footer/>
     </div>

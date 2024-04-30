@@ -109,3 +109,46 @@ export const retype_password_validation = {
     },
   },
 };
+
+export const appointment_data_validation = {
+  name: "date",
+  label: "date",
+  type: "date",
+  id: "date",
+  placeholder: "select date",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+  },
+};
+
+export const appointment_time_validation = {
+  name: "time",
+  label: "Time",
+  type: "time",
+  id: "time",
+  placeholder: "select time",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+  },
+};
+
+export const remark_validation = {
+  name: "remark",
+  label: "Remark",
+  type: "textarea",
+  id: "remark",
+  placeholder: "",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+  },
+};
+

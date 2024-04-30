@@ -19,7 +19,8 @@ const Trainers = () => {
                     </div>
                 </div>
             </div>
-            <div className="row">
+            <div className="row m-auto">
+            <div className="col-lg-4"></div>
                 <div className="col-lg-4">
                     <div className="trainer-item">
                         <div className="image-thumb">
@@ -28,16 +29,17 @@ const Trainers = () => {
                         <div className="down-content">
                             <span>Main Trainer</span>
                             <h4>Udesh Mahathanthila</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
+                            <p>Dedicated fitness professional with a passion for improving client health, wellness and quality of life. Deliver high-energy training using the latest techniques in exercise science, cardio programs and strength training.
+</p>
                             <ul className="social-icons">
-                                <li><a href="#"><i className="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.facebook.com/udesh.mahathanthila/"><i className="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
+                                <li><a href="https://lk.linkedin.com/in/udesh-mahathanthila-b09945b6"><i className="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-4">
+                {/* <div className="col-lg-4">
                     <div className="trainer-item">
                         <div className="image-thumb">
                             <img src={trainer2} alt=""/>
@@ -53,8 +55,8 @@ const Trainers = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div className="col-lg-4">
+                </div> */}
+                {/* <div className="col-lg-4">
                     <div className="trainer-item">
                         <div className="image-thumb">
                             <img src={trainer3} alt=""/>
@@ -70,7 +72,7 @@ const Trainers = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </section>
