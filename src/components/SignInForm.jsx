@@ -1,9 +1,10 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { Input } from "./Input";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   email_validation,
   password_validation,
+  username_validation,
 } from "../utils/inputValidations";
 import { useState } from "react";
 import { BsFillCheckSquareFill } from "react-icons/bs";
@@ -13,6 +14,8 @@ import toast from "react-hot-toast";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { IoPersonAddOutline } from "react-icons/io5";
 import Logo from "../assets/img/header/logo.png"
+import apiClient from "../Services/index"
+import { Urls } from "../urls";
 
 
 export const SignInForm = () => {
@@ -33,10 +36,23 @@ export const SignInForm = () => {
     }
   }, [success]);
 
+  const fetchData = async (params) => {
+    try {
+      const response = await apiClient.post(Urls.logIn, params);
+      toast.success("Login successfully")
+      localStorage.setItem('userLogin', JSON.stringify(response.data?.data))
+      navigate("/");
+    } catch (error) {
+      localStorage.removeItem('userLogin')
+      toast.error("Invalied Username or Password")
+
+    }
+  }
+
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data);
-    methods.reset();
-    setSuccess(true);
+    fetchData(data)
+    // setSuccess(true);
   });
 
   const navigateToSignUp = () => {
@@ -51,26 +67,19 @@ export const SignInForm = () => {
         autoComplete="off"
         className="form-container"
       >
-         <img className="logo" src={Logo} ></img>
+        <img className="logo" src={Logo} ></img>
         <h3 className="mb-4 text-center">Sign In</h3>
         <div className="new-grid-container">
-          <Input {...email_validation} />
+          <Input {...username_validation} />
           <Input {...password_validation} />
-          <Input
-            name="userRole"
-            label="User Role"
-            id="user-role"
-            select
-            options={roleOptions}
-          />
         </div>
-        <div className="mt-4  grid-container">
+        <div className="my-5  grid-container">
           <button onClick={navigateToSignUp} className="navigation-button">
-          <IoPersonAddOutline />
+            <IoPersonAddOutline />
             Sign Up
           </button>
           <button onClick={onSubmit} className="submit-button">
-          <RiLoginBoxLine />
+            <RiLoginBoxLine />
             Sign In
           </button>
           {success && (

@@ -1,5 +1,5 @@
 export const first_name_validation = {
-  name: "first name",
+  name: "firstName",
   label: "first name",
   type: "text",
   id: "first-name",
@@ -17,7 +17,7 @@ export const first_name_validation = {
 };
 
 export const last_name_validation = {
-  name: "last name",
+  name: "lastName",
   label: "last name",
   type: "text",
   id: "last-name",
@@ -54,7 +54,7 @@ export const email_validation = {
 };
 
 export const phone_validation = {
-  name: "phone",
+  name: "contactNo",
   label: "phone number",
   type: "tel",
   id: "phone",
@@ -67,6 +67,14 @@ export const phone_validation = {
     pattern: {
       value: /^0\d{9}$/,
       message: "not valid",
+    },
+    minLength: {
+      value: 10,
+      message: "min 10 characters",
+    },
+    maxLength: {
+      value: 10,
+      message: "min 10 characters",
     },
   },
 };
@@ -152,3 +160,102 @@ export const remark_validation = {
   },
 };
 
+export const prduct_name_validation = {
+  name: "product_name",
+  label: "Product name",
+  type: "text",
+  id: "product-name",
+  placeholder: "Product Name",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+    maxLength: {
+      value: 50,
+      message: "50 characters max",
+    },
+  },
+};
+
+export const prduct_discription_validation = {
+  name: "product_discriptiin",
+  label: "Product discriptiin",
+  type: "text",
+  id: "product-discriptiin",
+  placeholder: "Product Discriptiin",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+    maxLength: {
+      value: 500,
+      message: "500 characters max",
+    },
+  },
+};
+
+export const prduct_count_validation = {
+  name: "product_count",
+  label: "Product count",
+  type: "number",
+  id: "product-count",
+  placeholder: "Product count",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+    maxLength: {
+      value: 100,
+      message: "100 characters max",
+    },
+  },
+};
+
+export const prduct_price_validation = {
+  name: "product_price",
+  label: "Product price (Rs.)",
+  type: "number",
+  id: "product-price",
+  placeholder: "Product price",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+  },
+};
+
+export const prduct_img_validation = {
+  name: "product_image",
+  label: "Product image",
+  type: "file",
+  id: "product-image",
+  placeholder: "Product image",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+  },
+};
+
+export const username_validation = {
+  name: "username",
+  label: "User Name",
+  type: "text",
+  id: "username",
+  placeholder: "Username",
+  validation: {
+    required: {
+      value: true,
+      message: "required",
+    },
+    maxLength: {
+      value: 30,
+      message: "30 characters max",
+    },
+  },
+};

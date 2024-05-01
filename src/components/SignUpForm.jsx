@@ -8,6 +8,7 @@ import {
   last_name_validation,
   phone_validation,
   retype_password_validation,
+  username_validation,
 } from "../utils/inputValidations";
 import { useState } from "react";
 import { BsFillCheckSquareFill } from "react-icons/bs";
@@ -17,6 +18,8 @@ import toast from "react-hot-toast";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { RiLoginBoxLine } from "react-icons/ri";
 import Logo from "../assets/img/header/logo.png"
+import apiClient from "../Services/index"
+import { Urls } from "../urls";
 
 export const SignUpForm = () => {
   const methods = useForm();
@@ -30,8 +33,9 @@ export const SignUpForm = () => {
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data);
-    methods.reset();
-    setSuccess(true);
+    fetchData(data)
+    // methods.reset();
+    // setSuccess(true);
   });
 
   const navigate = useNavigate();
@@ -39,6 +43,24 @@ export const SignUpForm = () => {
   const navigateToSignIn = () => {
     navigate("/signin");
   };
+
+  const roleOptions = [
+    { label: "MEMBER", value: "MEMBER" },
+    { label: "TRAINER", value: "TRAINER" },
+    { label: "MANAGER", value: "MANAGER" },
+    { label: "ADMIN", value: "ADMIN" },
+  ];
+
+  const fetchData = async (params) => {
+    try {
+      const response = await apiClient.post(Urls.register, params);
+      toast.success("Regiterd successfully")
+      navigate("/signin");
+    } catch (error) {
+      toast.error(error.response.data.message??"Something went wrong")
+
+    }
+  }
 
   return (
     <FormProvider {...methods}>
@@ -55,6 +77,14 @@ export const SignUpForm = () => {
           <Input {...last_name_validation} />
           <Input {...email_validation} />
           <Input {...phone_validation} />
+          <Input
+            name="userRole"
+            label="User Role"
+            id="user-role"
+            select
+            options={roleOptions}
+          />
+            <Input {...username_validation} />
           <Input {...password_validation} />
           <Input {...retype_password_validation} />
         </div>

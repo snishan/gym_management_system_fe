@@ -18,6 +18,12 @@ const TrainerPage = () => {
     const [success, setSuccess] = useState(false);
 
     const leavedata = []
+
+    const roleOptions = [
+        { label: "FULL", value: "FULL" },
+        { label: "FIRST HALF", value: "FIRSTHALF" },
+        { label: "SECOND HALF", value: "SECONDHALF" },
+      ];
   
     const handleTab = () => {
 
@@ -58,7 +64,14 @@ const TrainerPage = () => {
                                                 <Input {...appointment_data_validation} />
                                             </div>
                                             <div className="col-6">
-                                                <Input {...appointment_time_validation} />
+                                            <Input
+                                                name="leaveType"
+                                                label="Leave Type"
+                                                id="leave-type"
+                                                select
+                                                options={roleOptions}
+                                            />
+                                                {/* <Input {...appointment_time_validation} /> */}
                                             </div>
                                         </div>
                                         <div className="row">
