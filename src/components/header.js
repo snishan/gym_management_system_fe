@@ -45,7 +45,7 @@ const Header = () => {
             seIsLogin(false)
             setName('')
             setRole('')
-           }
+        }
     }, []);
 
     useEffect(() => {

@@ -161,7 +161,7 @@ export const remark_validation = {
 };
 
 export const prduct_name_validation = {
-  name: "product_name",
+  name: "name",
   label: "Product name",
   type: "text",
   id: "product-name",
@@ -179,7 +179,7 @@ export const prduct_name_validation = {
 };
 
 export const prduct_discription_validation = {
-  name: "product_discriptiin",
+  name: "content",
   label: "Product discriptiin",
   type: "text",
   id: "product-discriptiin",
@@ -197,7 +197,7 @@ export const prduct_discription_validation = {
 };
 
 export const prduct_count_validation = {
-  name: "product_count",
+  name: "count",
   label: "Product count",
   type: "number",
   id: "product-count",
@@ -215,7 +215,7 @@ export const prduct_count_validation = {
 };
 
 export const prduct_price_validation = {
-  name: "product_price",
+  name: "price",
   label: "Product price (Rs.)",
   type: "number",
   id: "product-price",
@@ -229,7 +229,7 @@ export const prduct_price_validation = {
 };
 
 export const prduct_img_validation = {
-  name: "product_image",
+  name: "imageData",
   label: "Product image",
   type: "file",
   id: "product-image",

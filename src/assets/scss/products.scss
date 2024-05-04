@@ -1,4 +1,4 @@
-.product-card{
+.product-card {
     width: 400px;
     display: flex;
     margin: 10px;
@@ -6,24 +6,140 @@
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     cursor: pointer;
 
-    h4{
+    h4 {
         font-size: 19px;
         font-weight: 600;
         color: #232d39;
         letter-spacing: 0.5px;
         margin-bottom: 18px;
     }
-    h6{
+
+    h6 {
         color: #ed563b;
     }
 }
-.img-section{
+
+.img-section {
     margin: auto;
     margin-top: 0px;
     border: 1px solid ghostwhite;
-    .img{
+
+    .img {
         width: 250px;
         margin: auto;
         margin-bottom: 20%;
     }
 }
+
+.product-img {
+    width: 50px;
+    height: 50px;
+    vertical-align: bottom;
+}
+
+
+.search__title {
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    color: white;
+}
+
+.search-icon {
+    position: relative;
+    left: 95%;
+    bottom: 40px;
+    font-size: 20px;
+    background-color: #ed563b;
+    border: 1px solid #ed563b;
+    border-radius: 20px;
+}
+
+.search__input {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: transparent;
+    transition: transform 250ms ease-in-out;
+    font-size: 14px;
+    line-height: 18px;
+    color: #575756;
+    border-radius: 50px;
+    border: 1px solid #575756;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    background-color: white;
+}
+
+.img-section{
+    margin: auto;
+    text-align: center;
+    .product-img-update{
+        width: 200px;
+    }
+}
+
+
+.search__input::placeholder {
+    color: rgba(87, 87, 86, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.credits__container {
+    margin-top: 24px;
+}
+
+.credits__text {
+    text-align: center;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.credits__link {
+    color: #ff8b88;
+    text-decoration: none;
+    transition: color 250ms ease-in;
+}
+
+.credits__link:hover,
+.credits__link:focus {
+    color: rgb(191, 137, 135);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    
+    .delete-icon{
+        cursor: pointer;
+    }
+    .tbody{
+        vertical-align: bottom;
+    }
+
+    thead{
+        background:#ed563b !important;
+        color: aliceblue;
+        border-radius: 10px !important;
+    }
+  }
+  
+  th, td {
+    text-align:justify;
+  }
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+  .donload-btn{
+    float: right;
+    display: flex;
+  }
+  .donload-btn:disabled{
+    background-color: darkgray;
+    border: #575756;
+  }
+
+ .donnload-section {
+    height: 60px;
+    display: block;
+  }
