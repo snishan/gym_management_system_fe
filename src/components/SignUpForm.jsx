@@ -45,7 +45,7 @@ export const SignUpForm = () => {
   };
 
   const roleOptions = [
-    { label: "MEMBER", value: "MEMBER" },
+    // { label: "MEMBER", value: "MEMBER" },
     { label: "TRAINER", value: "TRAINER" },
     { label: "MANAGER", value: "MANAGER" },
     { label: "ADMIN", value: "ADMIN" },
@@ -84,7 +84,7 @@ export const SignUpForm = () => {
             select
             options={roleOptions}
           />
-            <Input {...username_validation} />
+          <Input {...username_validation} />
           <Input {...password_validation} />
           <Input {...retype_password_validation} />
         </div>

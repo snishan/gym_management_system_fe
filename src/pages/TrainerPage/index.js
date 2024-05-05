@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../../assets/scss/member.scss'
 import UserHeader from "../../components/usersHeader";
 import { Icon } from '@iconify/react';
 import { Input } from "../../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-    email_validation,
-    password_validation,
     appointment_data_validation,
-    appointment_time_validation,
     remark_validation
 } from "../../utils/inputValidations";
+import apiClient from "../../Services/index"
+import { Urls } from "../../urls";
+import toast from "react-hot-toast";
+import UpdateModal from "../../components/updateModal";
+import DeleteModal from "../../components/deleteModal"
 
 const TrainerPage = () => {
+    const loginStatus = localStorage.getItem('userLogin')
     const methods = useForm();
     const [tab, setTab] = useState(1);
-    const [success, setSuccess] = useState(false);
+    const [userId, setUserId] = useState('');
+    const [leaveList, setLeaveList] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [dataToUpdate, setDataToUpdate] = useState({});
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const leavedata = []
 
@@ -23,16 +30,137 @@ const TrainerPage = () => {
         { label: "FULL", value: "FULL" },
         { label: "FIRST HALF", value: "FIRSTHALF" },
         { label: "SECOND HALF", value: "SECONDHALF" },
-      ];
-  
-    const handleTab = () => {
+    ];
 
+    useEffect(() => {
+        if (tab == 2) {
+            getLeaves()
+        }
+    }, [tab])
+
+
+    useEffect(() => {
+        if (loginStatus !== null) {
+            var myObj = JSON.parse(loginStatus);
+            setUserId(myObj.id)
+        } else {
+            setUserId('')
+        }
+    }, [])
+
+    const handleShowModal = (data) => {
+        setShowModal(true);
+        setDataToUpdate(data)
+    };
+
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+
+    const getLeaves = async () => {
+        try {
+            const response = await apiClient.get(Urls.get_all_leaves);
+            if (response) {
+                const myLeave = response.data.data.filter(entry => entry.user.id === userId);
+                setLeaveList(myLeave)
+            }
+
+        } catch (error) {
+            setLeaveList([])
+            toast.error(error.response.data.message ?? "Something went wrong")
+        }
     }
-    const onSubmit = methods.handleSubmit((data) => {
-        console.log(data);
+    const clearData = () => {
         methods.reset();
-        setSuccess(true);
+    }
+    const onSubmit = methods.handleSubmit(async (data) => {
+        const params = {
+            "date": data.date,
+            "leaveType": data.leaveType,
+            "message": data.message,
+            "user":{"id" :userId}
+        }
+        try {
+            const response = await apiClient.post(Urls.create_leave, params);
+            if (response) {
+                methods.reset();
+                toast.success("Leave Created Successfully")
+            }
+
+        } catch (error) {
+            toast.error(error.response.data.message ?? "Something went wrong")
+        }
+
     });
+    const handleUpdateData = async (params) => {
+        // "user":{"id" :userId}
+        try {
+            const response = await apiClient.put(Urls.update_leave(params.id), params);
+            if (response) {
+                toast.success("Leave Updated Successfully")
+                handleCloseModal()
+                getLeaves()
+            }
+
+        } catch (error) {
+            toast.error(error.response.data.message ?? "Something went wrong")
+
+        }
+    }
+
+    const renderModalBody = (formData) => {
+        return (
+            <div className="new-grid-container">
+                <div className="row">
+                    <div className="col-6">
+                        <Input {...appointment_data_validation} />
+                    </div>
+                    <div className="col-6">
+                        <Input
+                            name="leaveType"
+                            label="Leave Type"
+                            id="leave-type"
+                            select
+                            options={roleOptions}
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <Input {...remark_validation} />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    const handleDelete = (data) => {
+        setDataToUpdate(data)
+        setShowDeleteModal(true)
+    }
+
+
+    const handleHideDeleteModal = () => {
+        setShowDeleteModal(false)
+    }
+
+    const handleDeleteData = async (data) => {
+        try {
+            const response = await apiClient.delete(Urls.update_leave(data));
+            if (response) {
+                toast.success("Leave Deleted Successfully")
+                handleHideDeleteModal()
+                getLeaves()
+            }
+
+        } catch (error) {
+            toast.error(error.response.data.message ?? "Something went wrong")
+
+        }
+    }
+
     return (
         <div className="member-page">
             <div className="row">
@@ -64,14 +192,13 @@ const TrainerPage = () => {
                                                 <Input {...appointment_data_validation} />
                                             </div>
                                             <div className="col-6">
-                                            <Input
-                                                name="leaveType"
-                                                label="Leave Type"
-                                                id="leave-type"
-                                                select
-                                                options={roleOptions}
-                                            />
-                                                {/* <Input {...appointment_time_validation} /> */}
+                                                <Input
+                                                    name="leaveType"
+                                                    label="Leave Type"
+                                                    id="leave-type"
+                                                    select
+                                                    options={roleOptions}
+                                                />
                                             </div>
                                         </div>
                                         <div className="row">
@@ -82,25 +209,18 @@ const TrainerPage = () => {
                                         </div>
                                     </div>
                                     <div className="mt-4  grid-container">
-                                        <button className="navigation-button">
-                                            {/* <IoPersonAddOutline /> */}
+                                        <button onClick={clearData} className="navigation-button">
                                             Cancel
                                         </button>
                                         <button onClick={onSubmit} className="submit-button">
-                                            {/* <RiLoginBoxLine /> */}
                                             Submit
                                         </button>
-                                        {/* {success && (
-                          <p className="success-message">
-                            <BsFillCheckSquareFill /> &nbsp; Sign In Successful!
-                          </p>
-                        )} */}
                                     </div>
                                 </form>
                             </FormProvider>
-                        </div> : 
-                        <div className="card">
-                            
+                        </div> :
+                        <div className="card mt-4">
+
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -113,25 +233,43 @@ const TrainerPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {leavedata.length == 0 ? <tr>No Data Available</tr> : leavedata.map((data, index) => {
+                                    {leaveList.length == 0 ? <tr>No Data Available</tr> : leaveList.map((data, index) => {
                                         return (
                                             <tr key={data.id}>
                                                 <td>{data.id}</td>
-                                                {/* <td><img className='cart-img' src={imgList[index]} /></td> */}
-                                                <td>{data.product.name}</td>
-                                                <td>{data.product.count}</td>
-                                                
-                                                <td>{data.product.price}</td>
-                                                <td><Icon className='delete-icon' icon="fluent:delete-28-regular" /></td>
+                                                <td>{data.date}</td>
+                                                <td>{data.leaveType}</td>
+                                                <td>{data.message}</td>
+                                                <td>{data.leaveStatus}</td>
+                                                <td>
+                                                    {data.leaveStatus=='APPROVE'?"-":
+                                                    <>
+                                                    <Icon color="green" onClick={() => handleShowModal(data)} className='delete-icon' icon="fluent:edit-28-regular" />
+                                                    <Icon color="red" onClick={() => handleDelete(data)} className='delete-icon mx-2' icon="fluent:delete-28-regular" />
+                                                    </> }
+                                                </td>
                                             </tr>)
                                     })}
 
                                 </tbody>
                             </table>
                         </div>
-                        }
+                    }
                 </div>
             </div>
+            <UpdateModal
+                show={showModal}
+                onHide={handleCloseModal}
+                onUpdate={handleUpdateData}
+                initialData={dataToUpdate}
+                modalBody={(formData) => renderModalBody(formData)}
+            />
+            <DeleteModal
+                show={showDeleteModal}
+                onHide={handleHideDeleteModal}
+                onDelete={handleDeleteData}
+                data={dataToUpdate}
+            />
         </div>
     );
 };

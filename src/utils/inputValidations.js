@@ -129,6 +129,10 @@ export const appointment_data_validation = {
       value: true,
       message: "required",
     },
+    min: {
+      value: new Date().toISOString().split('T')[0], 
+      message: "Please select a date in the future",
+    },
   },
 };
 
@@ -147,7 +151,7 @@ export const appointment_time_validation = {
 };
 
 export const remark_validation = {
-  name: "remark",
+  name: "message",
   label: "Remark",
   type: "textarea",
   id: "remark",
@@ -180,10 +184,10 @@ export const prduct_name_validation = {
 
 export const prduct_discription_validation = {
   name: "content",
-  label: "Product discriptiin",
+  label: "Product description",
   type: "text",
   id: "product-discriptiin",
-  placeholder: "Product Discriptiin",
+  placeholder: "Product Description",
   validation: {
     required: {
       value: true,
@@ -238,6 +242,11 @@ export const prduct_img_validation = {
     required: {
       value: true,
       message: "required",
+    },
+    validate: {
+      acceptPng: (file) => {
+        return file[0]?.type === "image/png" || "Only PNG files are allowed";
+      },
     },
   },
 };

@@ -30,7 +30,7 @@ const StockManagerPage = () => {
     const [tab, setTab] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
     const methods = useForm();
-    const [success, setSuccess] = useState(false);
+    const { watch ,register} = useForm();
     const [postImage, setPostImage] = useState({
         myFile: "",
     });
@@ -40,12 +40,22 @@ const StockManagerPage = () => {
     const [dataToUpdate, setDataToUpdate] = useState({});
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const tableRef = useRef(null);
-    
+    const imageDataVal = methods.watch(prduct_img_validation.name); 
+    console.log("imageDataVal",imageDataVal);
     const cartData = []
 
     useEffect(() => {
         getProducts()
     }, [])
+
+    useEffect(() => {
+        if (tab==1) {
+            getProducts()
+        }
+       
+    }, [tab])
+
+    
 
     useEffect(() => {
       if (productList) {
@@ -223,6 +233,9 @@ const StockManagerPage = () => {
         filename: 'Users table',
         sheet: 'Users'
     })
+    const handle=(e)=>{
+        console.log("e",e);
+    }
     return (
         <div className="member-page">
             <div className="row">
@@ -243,7 +256,6 @@ const StockManagerPage = () => {
                         <button className="search-icon" type="submit"><i class="fa fa-search"></i></button>
                     </div>} */}
                     {tab == 1 ?<CSVLink className="donnload-section" filename="product-list" data={productListCSV}><button disabled={productListCSV.length==0} className="submit-button donload-btn">Download CSV</button></CSVLink>:''}
-                   {/* <button onClick={onDownload}> Export excel </button> */}
                     {tab == 1 ?
                     
                         <div className="card">
@@ -254,7 +266,7 @@ const StockManagerPage = () => {
                                         <th scope="col">Id</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Product Name</th>
-                                        <th scope="col">Product Discription</th>
+                                        <th scope="col">Product Description</th>
                                         <th scope="col">Availbale Stock</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Action</th>
@@ -267,10 +279,10 @@ const StockManagerPage = () => {
                                                 <td>{data.id}</td>
                                                 <td><img className='product-img' src={"data:image/png;base64," + data.imageData} /></td>
                                                 <td>{data.name}</td>
-                                                <td>{data.content}</td>
+                                                <td className="discription">{data.content}</td>
                                                 <td>{data.count}</td>
                                                 <td>{data.price}</td>
-                                                <td>
+                                                <td className="action-section">
                                                     <Icon color="green" onClick={() => handleShowModal(data)} className='delete-icon' icon="fluent:edit-28-regular" />
                                                     <Icon color="red" onClick={() => handleDelete(data)} className='delete-icon mx-3' icon="fluent:delete-28-regular" />
                                                 </td>
@@ -308,8 +320,15 @@ const StockManagerPage = () => {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-12">
-                                                <Input id="fileInput" {...prduct_img_validation} />
+                                            <div className="col-6">
+                                                <Input type="file" id="fileInput" {...prduct_img_validation}   {...register(prduct_img_validation.name, prduct_img_validation.validation)}/>
+                                            </div>
+                                            <div className="col-6">
+                                            {imageDataVal && (
+                                                <div>
+                                                <img className="selected-img" src={URL.createObjectURL(imageDataVal[0])} alt="Selected" style={{ maxWidth: "100%" }} />
+                                                </div>
+                                            )}
                                             </div>
                                         </div>
                                     </div>

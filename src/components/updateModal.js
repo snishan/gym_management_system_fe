@@ -15,9 +15,8 @@ const UpdateModal = ({ show, onHide, onUpdate, initialData, modalBody }) => {
   
 
   const handleUpdate = methods.handleSubmit(async (data) => {
-    const file = data.imageData[0];
     setFormData(data)
-    onUpdate(formData);
+    onUpdate(data);
 
   });
 
@@ -44,11 +43,9 @@ const UpdateModal = ({ show, onHide, onUpdate, initialData, modalBody }) => {
               {modalBody(formData)}
               <div className="mt-4  grid-container">
                 <button type='button' onClick={onHide} className="navigation-button">
-                  {/* <IoPersonAddOutline /> */}
                   Cancel
                 </button>
                 <button onClick={handleUpdate} className="submit-button">
-                  {/* <RiLoginBoxLine /> */}
                   Submit
                 </button>
               </div>

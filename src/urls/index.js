@@ -15,6 +15,16 @@ export const Urls={
     },
     delete_cart(cartId){
         return `/kaaya-api/v1/carts/${cartId}`
+    },
+    create_appointment:'/kaaya-api/v1/appointments',
+    create_leave:'/kaaya-api/v1/leave',
+    get_all_leaves:'/kaaya-api/v1/leave',
+    update_leave(id){
+        return `/kaaya-api/v1/leave/${id}`
+    },
+    get_all_users:'/kaaya-api/v1/users',
+    update_user(id){
+        return `/kaaya-api/v1/users/${id}`
     }
 
 }

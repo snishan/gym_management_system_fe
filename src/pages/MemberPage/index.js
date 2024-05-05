@@ -5,7 +5,7 @@ import Plus from "../../assets/img/member/plus-icon.svg"
 import Minus from "../../assets/img/member/minus-icon.svg"
 import { Icon } from '@iconify/react';
 import { Input } from "../../components/Input";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm,Controller } from "react-hook-form";
 import {
     appointment_data_validation,
     appointment_time_validation,
@@ -23,11 +23,13 @@ const MemberPage = () => {
     const [tab, setTab] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
     const methods = useForm();
+    const { control, handleSubmit } = useForm();
     const [userId, setUserId] = useState('');
     const [productList, setProductList] = useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedData, setSelectedData] = useState({});
     const [productListCSV, setProductListCSV] = useState([]);
+    const [appointmentList, setAppointmentList] = useState([]);
 
     const roleOptions = [
         { label: "Mr. Udesh", value: "Mr. Udesh" },
@@ -41,6 +43,17 @@ const MemberPage = () => {
             setUserId('')
         }
     }, [])
+
+    useEffect(() => {
+     if (tab==1) {
+        if (userId) {
+            getProducts()
+        }
+     }else if(tab==3){
+        getAllAppointments()
+     }
+    }, [tab])
+    
 
     useEffect(() => {
         if (userId) {
@@ -67,6 +80,19 @@ const MemberPage = () => {
             setProductListCSV(transformedData)
           }
     }, [productList])
+
+    const getAllAppointments=async ()=>{
+        try {
+            const response = await apiClient.get(Urls.create_appointment);
+            if (response) {
+                const myAppoint = response.data.data.filter(entry => entry.user.id === userId);
+                setAppointmentList(myAppoint)
+            }
+
+        } catch (error) {
+            setAppointmentList([])
+        }
+    }
   
 
     const getProducts = async () => {
@@ -81,9 +107,26 @@ const MemberPage = () => {
         }
     }
 
-    const onSubmit = methods.handleSubmit((data) => {
-        console.log(data);
-        methods.reset();
+    const onSubmit = methods.handleSubmit(async (data) => {
+
+        const params={
+            "trainerName": data.trainers,
+            "date": data.date,
+            "time": data.time,
+            "message": data.message,
+            "user":{"id" :userId}
+          }
+
+          try {
+            const response = await apiClient.post(Urls.create_appointment,params);
+            if (response) {
+                methods.reset();
+                toast.success( "Appointment Created Successfully")
+            }
+
+        } catch (error) {
+            toast.error(error.response.data.message ?? "Something went wrong")
+        }
     });
 
     const handleChnageCount = async (count, cartId, productId) => {
@@ -141,6 +184,9 @@ const MemberPage = () => {
                     <div className="main-button mt-4 left-menu">
                         <a className={tab == 2 ? 'active-tab' : ''} onClick={() => setTab(2)}>Make an Appointment</a>
                     </div>
+                    <div className="main-button mt-4 left-menu">
+                        <a className={tab == 3 ? 'active-tab' : ''} onClick={() => setTab(3)}>My Appointment History</a>
+                    </div>
                 </div>
                 <div className="col-8 right-menu-section">
                 {tab == 1 ?<div className="donnload-section"><button onClick={()=>handlePrint()} disabled={productListCSV.length==0} className="submit-button donload-btn">Print My Cart</button></div>:''}
@@ -183,7 +229,7 @@ const MemberPage = () => {
                             {productList.length == 0 ? '' : <><p className='total-balance'>Total Cost: <span>Rs. {totalPrice}</span></p></>}
                         </div>
                         :
-                        <div className="card p-5">
+                        (tab==2?<div className="card p-5">
                             <FormProvider {...methods}>
                                 <form
                                     onSubmit={(e) => e.preventDefault()}
@@ -194,7 +240,7 @@ const MemberPage = () => {
                                     <div className="new-grid-container">
                                         <div className="row">
                                             <div className="col-6">
-                                                <Input {...appointment_data_validation} />
+                                                <Input  {...appointment_data_validation} />
                                             </div>
                                             <div className="col-6">
                                                 <Input {...appointment_time_validation} />
@@ -226,7 +272,36 @@ const MemberPage = () => {
                                     </div>
                                 </form>
                             </FormProvider>
-                        </div>
+                        </div>:
+                         <div className="card">
+                         <table className="table">
+                             <thead>
+                                 <tr>
+                                     <th scope="col">Id</th>
+                                     <th scope="col">Date</th>
+                                     <th scope="col">Time</th>
+                                     <th scope="col">Message</th>
+                                     <th scope="col">Trainer</th>
+                                     <th scope="col">Status</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 {appointmentList.length == 0 ? <tr>No Data Available</tr> : appointmentList.map((data, index) => {
+                                     return (
+                                         <tr key={data.id}>
+                                             <td>{data.id}</td>
+                                             <td>{data.date}</td>
+                                             <td>{data.time}</td>
+                                             <td>{data.message}</td>
+                                             <td>{data.trainerName}</td>
+                                             <td>{data.status}</td>
+                                         </tr>)
+                                 })}
+     
+                             </tbody>
+                         </table>
+                     </div>
+                        )
                     }
                 </div>
             </div>
