@@ -32,10 +32,7 @@ export const SignUpForm = () => {
   }, [success]);
 
   const onSubmit = methods.handleSubmit((data) => {
-    console.log(data);
     fetchData(data)
-    // methods.reset();
-    // setSuccess(true);
   });
 
   const navigate = useNavigate();

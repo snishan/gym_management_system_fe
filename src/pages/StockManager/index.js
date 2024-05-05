@@ -1,8 +1,6 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import '../../assets/scss/member.scss'
 import UserHeader from "../../components/usersHeader";
-import Plus from "../../assets/img/member/plus-icon.svg"
-import Minus from "../../assets/img/member/minus-icon.svg"
 import { Icon } from '@iconify/react';
 import { Input } from "../../components/Input";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
@@ -13,24 +11,17 @@ import {
     prduct_price_validation,
     prduct_img_validation
 } from "../../utils/inputValidations";
-import { RiLoginBoxLine } from "react-icons/ri";
-import { IoPersonAddOutline } from "react-icons/io5";
-import { BsFillCheckSquareFill } from "react-icons/bs";
 import apiClient from "../../Services/index"
 import { Urls } from "../../urls";
 import toast from "react-hot-toast";
-import Modal from 'react-bootstrap/Modal';
 import UpdateModal from "../../components/updateModal";
 import DeleteModal from "../../components/deleteModal"
-import { DownloadTableExcel ,useDownloadExcel} from 'react-export-table-to-excel';
-
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 const StockManagerPage = () => {
     const [tab, setTab] = useState(1);
-    const [totalPrice, setTotalPrice] = useState(0);
     const methods = useForm();
-    const { watch ,register} = useForm();
+    const { watch, register } = useForm();
     const [postImage, setPostImage] = useState({
         myFile: "",
     });
@@ -40,8 +31,8 @@ const StockManagerPage = () => {
     const [dataToUpdate, setDataToUpdate] = useState({});
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const tableRef = useRef(null);
-    const imageDataVal = methods.watch(prduct_img_validation.name); 
-    console.log("imageDataVal",imageDataVal);
+    const imageDataVal = methods.watch(prduct_img_validation.name);
+
     const cartData = []
 
     useEffect(() => {
@@ -49,21 +40,19 @@ const StockManagerPage = () => {
     }, [])
 
     useEffect(() => {
-        if (tab==1) {
+        if (tab == 1) {
             getProducts()
         }
-       
+
     }, [tab])
 
-    
-
     useEffect(() => {
-      if (productList) {
-        const transformedData = productList.map(item => {
-            return {id:item.id, name: item.name,content:item.content, count:item.count, price: item.price , }; 
-        });
-        setProductListCSV(transformedData)
-      }
+        if (productList) {
+            const transformedData = productList.map(item => {
+                return { id: item.id, name: item.name, content: item.content, count: item.count, price: item.price, };
+            });
+            setProductListCSV(transformedData)
+        }
     }, [productList])
 
     const getProducts = async () => {
@@ -92,8 +81,6 @@ const StockManagerPage = () => {
         });
     };
 
-
-
     const onSubmit = methods.handleSubmit(async (data) => {
 
         const file = data.imageData[0];
@@ -114,7 +101,7 @@ const StockManagerPage = () => {
             fetchData(params)
         }
     });
-       
+
 
     const fetchData = async (params) => {
         try {
@@ -141,11 +128,11 @@ const StockManagerPage = () => {
         setShowModal(false);
     };
 
-    const handleUpdateData =  (updatedData) => {
+    const handleUpdateData = (updatedData) => {
 
         if (updatedData) {
             const params = {
-                id:updatedData.id,
+                id: updatedData.id,
                 name: updatedData.name,
                 imageData: updatedData.imageData,
                 category: updatedData.category,
@@ -157,11 +144,11 @@ const StockManagerPage = () => {
             }
             updatedDataApi(params)
 
-    }
+        }
     };
-    const updatedDataApi=async (params)=>{
+    const updatedDataApi = async (params) => {
         try {
-            const response = await apiClient.put(Urls.update_products+params.id, params);
+            const response = await apiClient.put(Urls.update_products + params.id, params);
             if (response) {
                 toast.success("Product Updated Successfully")
                 handleCloseModal()
@@ -195,7 +182,6 @@ const StockManagerPage = () => {
                     </div>
                     <div className="row">
                         <div className="col-12 img-section">
-                            {/* <Input {...prduct_img_validation} /> */}
                             <img className='product-img-update' src={"data:image/png;base64," + formData.imageData} />
                         </div>
                     </div>
@@ -205,14 +191,14 @@ const StockManagerPage = () => {
         );
     };
 
-    const handleDelete=(data)=>{
+    const handleDelete = (data) => {
         setDataToUpdate(data)
         setShowDeleteModal(true)
     }
 
-    const handleDeleteData=async (data)=>{
+    const handleDeleteData = async (data) => {
         try {
-            const response = await apiClient.delete(Urls.update_products+data);
+            const response = await apiClient.delete(Urls.update_products + data);
             if (response) {
                 toast.success("Product Deleted Successfully")
                 handleHideDeleteModal()
@@ -225,17 +211,10 @@ const StockManagerPage = () => {
         }
     }
 
-    const handleHideDeleteModal=()=>{
+    const handleHideDeleteModal = () => {
         setShowDeleteModal(false)
     }
-    const { onDownload } = useDownloadExcel({
-        currentTableRef: tableRef.current,
-        filename: 'Users table',
-        sheet: 'Users'
-    })
-    const handle=(e)=>{
-        console.log("e",e);
-    }
+
     return (
         <div className="member-page">
             <div className="row">
@@ -251,16 +230,10 @@ const StockManagerPage = () => {
                     </div>
                 </div>
                 <div className="col-8 right-menu-section">
-                    {/* {tab == 1 && <div className="search__container">
-                        <input className="search__input" type="text" placeholder="Search.." name="search" />
-                        <button className="search-icon" type="submit"><i class="fa fa-search"></i></button>
-                    </div>} */}
-                    {tab == 1 ?<CSVLink className="donnload-section" filename="product-list" data={productListCSV}><button disabled={productListCSV.length==0} className="submit-button donload-btn">Download CSV</button></CSVLink>:''}
+                    {tab == 1 ? <CSVLink className="donnload-section" filename="product-list" data={productListCSV}><button disabled={productListCSV.length == 0} className="submit-button donload-btn">Download CSV</button></CSVLink> : ''}
                     {tab == 1 ?
-                    
                         <div className="card">
-
-                            <table  ref={tableRef} className="table">
+                            <table ref={tableRef} className="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Id</th>
@@ -291,7 +264,6 @@ const StockManagerPage = () => {
 
                                 </tbody>
                             </table>
-                            {cartData.length == 0 ? '' : <><p className='total-balance'>Total Balance: <span>Rs. {totalPrice}</span></p></>}
                         </div>
                         :
                         <div className="card p-5">
@@ -321,14 +293,14 @@ const StockManagerPage = () => {
                                         </div>
                                         <div className="row">
                                             <div className="col-6">
-                                                <Input type="file" id="fileInput" {...prduct_img_validation}   {...register(prduct_img_validation.name, prduct_img_validation.validation)}/>
+                                                <Input type="file" id="fileInput" {...prduct_img_validation}   {...register(prduct_img_validation.name, prduct_img_validation.validation)} />
                                             </div>
                                             <div className="col-6">
-                                            {imageDataVal && (
-                                                <div>
-                                                <img className="selected-img" src={URL.createObjectURL(imageDataVal[0])} alt="Selected" style={{ maxWidth: "100%" }} />
-                                                </div>
-                                            )}
+                                                {imageDataVal?.length > 0 && (
+                                                    <div>
+                                                        <img className="selected-img" src={URL?.createObjectURL(imageDataVal[0])} alt="Selected" style={{ maxWidth: "100%" }} />
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

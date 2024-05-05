@@ -16,7 +16,6 @@ const Products = () => {
         getProducts()
         if (loginStatus !==null) {
             var myObj = JSON.parse(loginStatus);
-            console.log("myObj",myObj);
             setRole(myObj.userRole)
             setUserId(myObj.id)
            }else{

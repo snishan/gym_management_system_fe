@@ -1,11 +1,11 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import '../../assets/scss/member.scss';
 import UserHeader from "../../components/usersHeader";
 import Plus from "../../assets/img/member/plus-icon.svg"
 import Minus from "../../assets/img/member/minus-icon.svg"
 import { Icon } from '@iconify/react';
 import { Input } from "../../components/Input";
-import { FormProvider, useForm,Controller } from "react-hook-form";
+import { FormProvider, useForm, Controller } from "react-hook-form";
 import {
     appointment_data_validation,
     appointment_time_validation,
@@ -23,7 +23,6 @@ const MemberPage = () => {
     const [tab, setTab] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
     const methods = useForm();
-    const { control, handleSubmit } = useForm();
     const [userId, setUserId] = useState('');
     const [productList, setProductList] = useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -45,15 +44,15 @@ const MemberPage = () => {
     }, [])
 
     useEffect(() => {
-     if (tab==1) {
-        if (userId) {
-            getProducts()
+        if (tab == 1) {
+            if (userId) {
+                getProducts()
+            }
+        } else if (tab == 3) {
+            getAllAppointments()
         }
-     }else if(tab==3){
-        getAllAppointments()
-     }
     }, [tab])
-    
+
 
     useEffect(() => {
         if (userId) {
@@ -75,13 +74,13 @@ const MemberPage = () => {
 
         if (productList) {
             const transformedData = productList.map(item => {
-                return {id:item.id, name: item.name,content:item.content, count:item.count, price: item.price , }; 
+                return { id: item.id, name: item.name, content: item.content, count: item.count, price: item.price, };
             });
             setProductListCSV(transformedData)
-          }
+        }
     }, [productList])
 
-    const getAllAppointments=async ()=>{
+    const getAllAppointments = async () => {
         try {
             const response = await apiClient.get(Urls.create_appointment);
             if (response) {
@@ -93,7 +92,7 @@ const MemberPage = () => {
             setAppointmentList([])
         }
     }
-  
+
 
     const getProducts = async () => {
         try {
@@ -109,19 +108,19 @@ const MemberPage = () => {
 
     const onSubmit = methods.handleSubmit(async (data) => {
 
-        const params={
+        const params = {
             "trainerName": data.trainers,
             "date": data.date,
             "time": data.time,
             "message": data.message,
-            "user":{"id" :userId}
-          }
+            "user": { "id": userId }
+        }
 
-          try {
-            const response = await apiClient.post(Urls.create_appointment,params);
+        try {
+            const response = await apiClient.post(Urls.create_appointment, params);
             if (response) {
                 methods.reset();
-                toast.success( "Appointment Created Successfully")
+                toast.success("Appointment Created Successfully")
             }
 
         } catch (error) {
@@ -169,7 +168,7 @@ const MemberPage = () => {
     }
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
-      });
+    });
 
     return (
         <div className="member-page">
@@ -189,7 +188,7 @@ const MemberPage = () => {
                     </div>
                 </div>
                 <div className="col-8 right-menu-section">
-                {tab == 1 ?<div className="donnload-section"><button onClick={()=>handlePrint()} disabled={productListCSV.length==0} className="submit-button donload-btn">Print My Cart</button></div>:''}
+                    {tab == 1 ? <div className="donnload-section"><button onClick={() => handlePrint()} disabled={productListCSV.length == 0} className="submit-button donload-btn">Print My Cart</button></div> : ''}
                     {tab == 1 ?
                         <div className="card">
 
@@ -229,7 +228,7 @@ const MemberPage = () => {
                             {productList.length == 0 ? '' : <><p className='total-balance'>Total Cost: <span>Rs. {totalPrice}</span></p></>}
                         </div>
                         :
-                        (tab==2?<div className="card p-5">
+                        (tab == 2 ? <div className="card p-5">
                             <FormProvider {...methods}>
                                 <form
                                     onSubmit={(e) => e.preventDefault()}
@@ -272,35 +271,35 @@ const MemberPage = () => {
                                     </div>
                                 </form>
                             </FormProvider>
-                        </div>:
-                         <div className="card">
-                         <table className="table">
-                             <thead>
-                                 <tr>
-                                     <th scope="col">Id</th>
-                                     <th scope="col">Date</th>
-                                     <th scope="col">Time</th>
-                                     <th scope="col">Message</th>
-                                     <th scope="col">Trainer</th>
-                                     <th scope="col">Status</th>
-                                 </tr>
-                             </thead>
-                             <tbody>
-                                 {appointmentList.length == 0 ? <tr>No Data Available</tr> : appointmentList.map((data, index) => {
-                                     return (
-                                         <tr key={data.id}>
-                                             <td>{data.id}</td>
-                                             <td>{data.date}</td>
-                                             <td>{data.time}</td>
-                                             <td>{data.message}</td>
-                                             <td>{data.trainerName}</td>
-                                             <td>{data.status}</td>
-                                         </tr>)
-                                 })}
-     
-                             </tbody>
-                         </table>
-                     </div>
+                        </div> :
+                            <div className="card">
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Message</th>
+                                            <th scope="col">Trainer</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {appointmentList.length == 0 ? <tr>No Data Available</tr> : appointmentList.map((data, index) => {
+                                            return (
+                                                <tr key={data.id}>
+                                                    <td>{data.id}</td>
+                                                    <td>{data.date}</td>
+                                                    <td>{data.time}</td>
+                                                    <td>{data.message}</td>
+                                                    <td>{data.trainerName}</td>
+                                                    <td>{data.status}</td>
+                                                </tr>)
+                                        })}
+
+                                    </tbody>
+                                </table>
+                            </div>
                         )
                     }
                 </div>

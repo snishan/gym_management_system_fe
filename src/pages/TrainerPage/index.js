@@ -80,7 +80,7 @@ const TrainerPage = () => {
             "date": data.date,
             "leaveType": data.leaveType,
             "message": data.message,
-            "user":{"id" :userId}
+            "user": { "id": userId }
         }
         try {
             const response = await apiClient.post(Urls.create_leave, params);
@@ -242,11 +242,11 @@ const TrainerPage = () => {
                                                 <td>{data.message}</td>
                                                 <td>{data.leaveStatus}</td>
                                                 <td>
-                                                    {data.leaveStatus=='APPROVE'?"-":
-                                                    <>
-                                                    <Icon color="green" onClick={() => handleShowModal(data)} className='delete-icon' icon="fluent:edit-28-regular" />
-                                                    <Icon color="red" onClick={() => handleDelete(data)} className='delete-icon mx-2' icon="fluent:delete-28-regular" />
-                                                    </> }
+                                                    {data.leaveStatus == 'APPROVE' ? "-" :
+                                                        <>
+                                                            <Icon color="green" onClick={() => handleShowModal(data)} className='delete-icon' icon="fluent:edit-28-regular" />
+                                                            <Icon color="red" onClick={() => handleDelete(data)} className='delete-icon mx-2' icon="fluent:delete-28-regular" />
+                                                        </>}
                                                 </td>
                                             </tr>)
                                     })}

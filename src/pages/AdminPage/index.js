@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../../assets/scss/member.scss'
 import UserHeader from "../../components/usersHeader";
-import Plus from "../../assets/img/member/plus-icon.svg"
-import Minus from "../../assets/img/member/minus-icon.svg"
 import { Icon } from '@iconify/react';
 import { Input } from "../../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
@@ -42,9 +40,6 @@ const AdminPage = () => {
         setShowDeleteModal(false)
     }
 
-
-    const cartData = []
-
     const statusOption = [
         { label: "ACTIVATED", value: "ACTIVATED" },
         { label: "DEACTIVATED", value: "DEACTIVATED" },
@@ -71,12 +66,12 @@ const AdminPage = () => {
             setAllMemberList([])
         } else if (tab == 2) {
             getAllMembersDropdown()
-        }else if (tab == 5) {
+        } else if (tab == 5) {
             getAllAppointments()
         }
     }, [tab])
 
-    const getAllAppointments=async ()=>{
+    const getAllAppointments = async () => {
         try {
             const response = await apiClient.get(Urls.create_appointment);
             if (response) {
@@ -147,11 +142,10 @@ const AdminPage = () => {
         }
     });
 
-    const handleChnage = async (id, data,record) => {
-        console.log("data",record);
+    const handleChnage = async (id, data, record) => {
         let params = record;
         params.status = data.target.value;
-   
+
         try {
             const response = await apiClient.put(Urls.update_user(id), params);
             if (response) {
@@ -165,7 +159,7 @@ const AdminPage = () => {
     }
 
     const handleDeleteData = async (data) => {
-        if (tab==3) {
+        if (tab == 3) {
             try {
                 const response = await apiClient.delete(Urls.update_leave(data));
                 if (response) {
@@ -173,12 +167,12 @@ const AdminPage = () => {
                     handleHideDeleteModal()
                     getAllLeaves()
                 }
-    
+
             } catch (error) {
                 toast.error(error.response.data.message ?? "Something went wrong")
-    
-            } 
-        }else{
+
+            }
+        } else {
             try {
                 const response = await apiClient.delete(Urls.update_user(data));
                 if (response) {
@@ -186,13 +180,13 @@ const AdminPage = () => {
                     handleHideDeleteModal()
                     getAllMembers()
                 }
-    
+
             } catch (error) {
                 toast.error(error.response.data.message ?? "Something went wrong")
-    
+
             }
         }
-       
+
     }
 
     const handleChnageLeave = async (id, data, record) => {
@@ -210,6 +204,21 @@ const AdminPage = () => {
         }
 
     }
+    const handleChnageAppointment = async (id, data, record) => {
+
+        let params = record;
+        params.status = data.target.value;
+        try {
+            const response = await apiClient.put(Urls.update_appointment(id), params);
+            if (response) {
+                toast.success("Appointment Updated successfully")
+                getAllAppointments()
+            }
+        } catch (error) {
+            toast.error(error.response.data.message ?? "Something went wrong")
+        }
+
+    }
     const clearData = () => {
         methodsLeave.reset();
     }
@@ -218,7 +227,7 @@ const AdminPage = () => {
             "date": data.date,
             "leaveType": data.leaveType,
             "message": data.message,
-            "user":{"id" :data.userId}
+            "user": { "id": data.userId }
         }
         try {
             const response = await apiClient.post(Urls.create_leave, params);
@@ -230,12 +239,7 @@ const AdminPage = () => {
         } catch (error) {
             toast.error(error.response.data.message ?? "Something went wrong")
         }
-
     });
-
-    const handleDeleteLeave=()=>{
-
-    }
 
     const returnSection = () => {
         if (tab == 1) {
@@ -263,7 +267,7 @@ const AdminPage = () => {
                                         <td>{data.email}</td>
                                         <td>{data.contactNo}</td>
                                         <td>
-                                            <select value={data.status} defaultValue={data.status} onChange={(e) => handleChnage(data.id, e,data)} name="cars" id="cars">
+                                            <select value={data.status} defaultValue={data.status} onChange={(e) => handleChnage(data.id, e, data)} name="cars" id="cars">
                                                 {statusOption.map((data) => {
                                                     return <option value={data.value}>{data.label}</option>
                                                 })}
@@ -310,7 +314,7 @@ const AdminPage = () => {
 
                                             </select>
                                         </td>
-                                        <td><Icon color="red" onClick={() => handleDelete(data)}  className='delete-icon' icon="fluent:delete-28-regular" /></td>
+                                        <td><Icon color="red" onClick={() => handleDelete(data)} className='delete-icon' icon="fluent:delete-28-regular" /></td>
                                     </tr>)
                             })}
 
@@ -421,7 +425,7 @@ const AdminPage = () => {
                     </FormProvider>
                 </div>
             )
-        }else if(tab==5){
+        } else if (tab == 5) {
             return (
                 <div className="card">
                     <table className="table">
@@ -445,7 +449,7 @@ const AdminPage = () => {
                                         <td>{data.time}</td>
                                         <td>{data.trainerName}</td>
                                         <td>
-                                            <select value={data.leaveStatus} defaultValue={data.leaveStatus} onChange={(e) => handleChnageLeave(data.id, e, data)} name="cars" id="cars">
+                                            <select value={data.leaveStatus} defaultValue={data.leaveStatus} onChange={(e) => handleChnageAppointment(data.id, e, data)} name="cars" id="cars">
                                                 {leaveOption.map((data) => {
                                                     return <option value={data.value}>{data.label}</option>
                                                 })}
@@ -487,7 +491,6 @@ const AdminPage = () => {
                     </div>
                 </div>
                 <div className="col-8 right-menu-section">
-
                     {returnSection()}
                 </div>
             </div>

@@ -50,7 +50,6 @@ export const SignInForm = () => {
   }
 
   const onSubmit = methods.handleSubmit((data) => {
-    console.log(data);
     fetchData(data)
     // setSuccess(true);
   });

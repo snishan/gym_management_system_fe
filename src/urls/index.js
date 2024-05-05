@@ -25,6 +25,10 @@ export const Urls={
     get_all_users:'/kaaya-api/v1/users',
     update_user(id){
         return `/kaaya-api/v1/users/${id}`
+    },
+    update_appointment(id){
+        return `/kaaya-api/v1/appointments/${id}`
     }
+
 
 }
